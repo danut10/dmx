@@ -31,11 +31,11 @@ async function refreshProjects() {
       const tdName = document.createElement('td'); tdName.textContent = p.name;
       const tdDescr = document.createElement('td'); tdDescr.className = 'muted'; tdDescr.textContent = p.descr || '';
       const tdActions = document.createElement('td'); tdActions.className = 'actions';
-      const view = document.createElement('button'); view.textContent = 'View';
+      const view = document.createElement('button'); view.textContent = 'View'; view.className = 'btn btn-sm btn-outline-primary me-1';
       view.onclick = () => { window.location.href = '/project/view/' + p.id; };
-      const edit = document.createElement('button'); edit.textContent = 'Edit';
+      const edit = document.createElement('button'); edit.textContent = 'Edit'; edit.className = 'btn btn-sm btn-outline-secondary me-1';
       edit.onclick = () => { window.location.href = '/project/edit/' + p.id; };
-      const del = document.createElement('button'); del.textContent = 'Delete';
+      const del = document.createElement('button'); del.textContent = 'Delete'; del.className = 'btn btn-sm btn-danger';
       del.onclick = async () => {
         if (!confirm('Delete project "' + p.name + '"?')) return;
         try {
@@ -54,6 +54,10 @@ async function refreshProjects() {
 }
 
 async function initProjects() {
+  // Always refresh the projects list (works on list page and add page).
+  await refreshProjects();
+
+  // If there's an add form on the page, wire it up.
   const form = document.getElementById('project-form');
   if (!form) return;
   const submitBtn = document.getElementById('project-submit');
@@ -78,7 +82,6 @@ async function initProjects() {
     } catch (err) { showToast('Create failed: ' + err.message, 'error'); }
     finally { submitBtn.disabled = false; }
   };
-  await refreshProjects();
 }
 
 async function showProjectDetails(id, editable=false){
@@ -97,9 +100,9 @@ async function refreshCandidates() {
       const tdId = document.createElement('td'); tdId.textContent = p.id;
       const tdName = document.createElement('td'); tdName.textContent = p.name;
       const tdActions = document.createElement('td'); tdActions.className = 'actions';
-      const view = document.createElement('button'); view.textContent = 'View'; view.onclick = () => { window.location.href = '/candidate/view/' + p.id; };
-      const edit = document.createElement('button'); edit.textContent = 'Edit'; edit.onclick = () => { window.location.href = '/candidate/edit/' + p.id; };
-      const del = document.createElement('button'); del.textContent = 'Delete';
+      const view = document.createElement('button'); view.textContent = 'View'; view.className = 'btn btn-sm btn-outline-primary me-1'; view.onclick = () => { window.location.href = '/candidate/view/' + p.id; };
+      const edit = document.createElement('button'); edit.textContent = 'Edit'; edit.className = 'btn btn-sm btn-outline-secondary me-1'; edit.onclick = () => { window.location.href = '/candidate/edit/' + p.id; };
+      const del = document.createElement('button'); del.textContent = 'Delete'; del.className = 'btn btn-sm btn-danger';
       del.onclick = async () => {
         if (!confirm('Delete candidate "' + p.name + '"?')) return;
         try{
@@ -118,6 +121,10 @@ async function refreshCandidates() {
 }
 
 async function initCandidates() {
+  // Always refresh the candidates list (works on list page and add page).
+  await refreshCandidates();
+
+  // If there's an add form on the page, wire it up.
   const form = document.getElementById('candidate-form');
   if (!form) return;
   const submitBtn = document.getElementById('candidate-submit');
@@ -131,7 +138,6 @@ async function initCandidates() {
       catch(err){ showToast('Create failed: ' + err.message, 'error'); }
       finally{ submitBtn.disabled = false; }
   };
-  await refreshCandidates();
 }
 
 async function showCandidateDetails(id, editable=false){
