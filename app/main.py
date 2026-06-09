@@ -45,6 +45,17 @@ def candidates_page(request: Request):
     return _render_template("candidates.html")
 
 
+# Add pages for creating new entities
+@app.get('/project/add', response_class=HTMLResponse)
+def project_add(request: Request):
+    return _render_template('project_add.html')
+
+
+@app.get('/candidate/add', response_class=HTMLResponse)
+def candidate_add(request: Request):
+    return _render_template('candidate_add.html')
+
+
 # Project view/edit pages
 @app.get('/project/view/{project_id}', response_class=HTMLResponse)
 def project_view(project_id: int, request: Request):

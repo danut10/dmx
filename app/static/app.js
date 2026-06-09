@@ -21,6 +21,7 @@ function showToast(msg, type=''){
 
 async function refreshProjects() {
   const tbody = document.getElementById('project-list');
+  if (!tbody) return;
   try {
     const projects = await fetchJSON('/api/projects/');
     tbody.innerHTML = '';
@@ -66,9 +67,14 @@ async function initProjects() {
     try {
       submitBtn.disabled = true;
       await fetchJSON('/api/projects/', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code, name, descr }) });
+      // If we're on the separate add page, redirect back to list
+      if (window.location.pathname === '/project/add') {
+        window.location.href = '/projects';
+        return;
+      }
       form.reset();
       showToast('Project added');
-      await refreshProjects();
+      if (document.getElementById('project-list')) await refreshProjects();
     } catch (err) { showToast('Create failed: ' + err.message, 'error'); }
     finally { submitBtn.disabled = false; }
   };
@@ -82,6 +88,7 @@ async function showProjectDetails(id, editable=false){
 // Candidates
 async function refreshCandidates() {
   const tbody = document.getElementById('candidate-list');
+  if (!tbody) return;
   try {
     const items = await fetchJSON('/api/candidates/');
     tbody.innerHTML = '';
@@ -118,9 +125,11 @@ async function initCandidates() {
     e.preventDefault();
     const name = document.getElementById('c_name').value.trim();
     if (!name) return showToast('Name is required', 'error');
-    try{ submitBtn.disabled = true; await fetchJSON('/api/candidates/', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name }) }); form.reset(); showToast('Candidate added'); await refreshCandidates(); }
-    catch(err){ showToast('Create failed: ' + err.message, 'error'); }
-    finally{ submitBtn.disabled = false; }
+    try{ submitBtn.disabled = true; await fetchJSON('/api/candidates/', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name }) });
+        if (window.location.pathname === '/candidate/add') { window.location.href = '/candidates'; return; }
+        form.reset(); showToast('Candidate added'); if (document.getElementById('candidate-list')) await refreshCandidates(); }
+      catch(err){ showToast('Create failed: ' + err.message, 'error'); }
+      finally{ submitBtn.disabled = false; }
   };
   await refreshCandidates();
 }

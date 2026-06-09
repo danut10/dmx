@@ -17,30 +17,13 @@
     <div class="grid">
       <main>
         <section>
-          <h2>List</h2>
+          <h2>List <a href="/project/add" class="add-link">Add Project</a></h2>
           <table id="project-table" class="list-table">
             <thead>
               <tr><th>Code</th><th>Name</th><th>Description</th><th>Actions</th></tr>
             </thead>
             <tbody id="project-list"><tr><td colspan="4">Loading…</td></tr></tbody>
           </table>
-        </section>
-
-        <section>
-          <h2>Add Project</h2>
-          <form id="project-form" novalidate>
-            <label>Code<br>
-              <input id="code" name="code" placeholder="Code (max 5)" maxlength="5" required />
-            </label>
-            <label>Name<br>
-              <input id="name" name="name" placeholder="Name (max 100)" maxlength="100" required />
-            </label>
-            <label>Description<br>
-              <textarea id="descr" name="descr" placeholder="Description"></textarea>
-            </label>
-            <br />
-            <button id="project-submit" type="submit">Add Project</button>
-          </form>
         </section>
       </main>
 

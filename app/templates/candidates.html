@@ -17,24 +17,13 @@
     <div class="grid">
       <main>
         <section>
-          <h2>List</h2>
+          <h2>List <a href="/candidate/add" class="add-link">Add Candidate</a></h2>
           <table id="candidate-table" class="list-table">
             <thead>
               <tr><th>ID</th><th>Name</th><th>Actions</th></tr>
             </thead>
             <tbody id="candidate-list"><tr><td colspan="3">Loading…</td></tr></tbody>
           </table>
-        </section>
-
-        <section>
-          <h2>Add Candidate</h2>
-          <form id="candidate-form" novalidate>
-            <label>Name<br>
-              <input id="c_name" name="name" placeholder="Name (max 100)" maxlength="100" required />
-            </label>
-            <br />
-            <button id="candidate-submit" type="submit">Add Candidate</button>
-          </form>
         </section>
       </main>
 
