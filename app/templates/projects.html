@@ -18,7 +18,12 @@
       <main>
         <section>
           <h2>List</h2>
-          <div id="project-list">Loading…</div>
+          <table id="project-table" class="list-table">
+            <thead>
+              <tr><th>Code</th><th>Name</th><th>Description</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="project-list"><tr><td colspan="4">Loading…</td></tr></tbody>
+          </table>
         </section>
 
         <section>
@@ -39,10 +44,7 @@
         </section>
       </main>
 
-      <aside id="project-detail" class="detail">
-        <h2>Project Details</h2>
-        <div id="project-detail-content">Select a project to see details.</div>
-      </aside>
+      
     </div>
 
     <script src="/static/app.js"></script>
