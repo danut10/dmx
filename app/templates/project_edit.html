@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Edit Project — DMX</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <h1>Edit Project</h1>
+    <nav>
+      <a href="/">Home</a> |
+      <a href="/projects">Projects</a>
+    </nav>
+
+    <div id="project-edit">Loading…</div>
+
+    <script>
+      const id = location.pathname.split('/').pop();
+      async function load(){
+        const res = await fetch('/api/projects/' + id);
+        if (!res.ok) return document.getElementById('project-edit').textContent = 'Not found';
+        const p = await res.json();
+        document.getElementById('project-edit').innerHTML = `
+          <form id='edit-form'>
+            <label>Code<br><input id='code' maxlength='5' value='${p.code}' required /></label><br>
+            <label>Name<br><input id='name' maxlength='100' value='${p.name}' required /></label><br>
+            <label>Description<br><textarea id='descr'>${p.descr||''}</textarea></label><br>
+            <button type='submit'>Save</button>
+          </form>
+        `;
+        document.getElementById('edit-form').onsubmit = async (e) => {
+          e.preventDefault();
+          const body = { code: document.getElementById('code').value.trim(), name: document.getElementById('name').value.trim() };
+          await fetch('/api/projects/' + id, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+          location.href = '/project/view/' + id;
+        };
+      }
+      load();
+    </script>
+  </body>
+</html>

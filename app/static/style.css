@@ -1,0 +1,11 @@
+.body, body { font-family: system-ui, Arial, sans-serif; margin: 24px; }
+nav { margin-bottom: 12px; }
+input, textarea { padding: 6px; margin: 4px 0; width: 100%; box-sizing: border-box; }
+button { padding: 6px 12px; }
+.grid { display: grid; grid-template-columns: 1fr 360px; gap: 20px; align-items: start; }
+.item { border: 1px solid #ddd; padding: 8px; margin: 6px 0; border-radius: 6px; background: #fff; }
+.item .actions { margin-top: 6px; display: flex; gap: 6px; }
+.detail { border: 1px solid #eee; padding: 12px; border-radius: 6px; background:#fafafa; min-height: 120px; }
+.toast { position: fixed; right: 20px; bottom: 20px; background: rgba(0,0,0,0.85); color: #fff; padding: 10px 14px; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.muted { color: #666; font-size: 0.9em; }
+.actions button { cursor: pointer; }

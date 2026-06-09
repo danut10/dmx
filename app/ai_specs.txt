@@ -1,0 +1,37 @@
+I want to create a python / Fast API app in the current project.
+Application name will be DMX. It is a Recruitment application.
+
+Entities:
+* Project
+** id (int autoincrement)
+** code (max 5 chars)
+** name (max 100 chars)
+** descr (free text)
+
+* Candidate
+** id (int autoincrement)
+** name (max 100 chars)
+
+Functionalities
+* Project Functionalities
+** View list of projects
+** View details of project
+** Modify a project (code, name)
+** Add new project 
+** Delete a project
+* Candidate functionalities
+** View list of candidates
+** View detail of a candidate
+** Modify a candidate (name)
+** Add new candidate
+** Delete a candidate
+
+Architecture
+* Technology stack: Python / Fast API, SQLAlchemy, HTML, CSS, Javascript
+* Database: MySQL
+* Database connect: host=localhost, port=3306, dbname=dmx, user=root, password=Hamurabi20#
+
+Ask me any question is needed
+
+
+

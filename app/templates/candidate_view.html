@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>View Candidate — DMX</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <h1>Candidate</h1>
+    <nav>
+      <a href="/">Home</a> |
+      <a href="/candidates">Candidates</a>
+    </nav>
+
+    <div id="candidate-view">Loading…</div>
+
+    <script>
+      const id = location.pathname.split('/').pop();
+      async function load(){
+        const res = await fetch('/api/candidates/' + id);
+        if (!res.ok) return document.getElementById('candidate-view').textContent = 'Not found';
+        const p = await res.json();
+        document.getElementById('candidate-view').innerHTML = `<h2>${p.name}</h2><p><a href='/candidate/edit/${p.id}'>Edit</a></p>`;
+      }
+      load();
+    </script>
+  </body>
+</html>

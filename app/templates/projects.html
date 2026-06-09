@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Projects — DMX</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <h1>Projects</h1>
+    <nav>
+      <a href="/">Home</a> |
+      <a href="/candidates">Candidates</a>
+    </nav>
+
+    <div id="toast" class="toast" aria-live="polite" style="display:none"></div>
+
+    <div class="grid">
+      <main>
+        <section>
+          <h2>List</h2>
+          <div id="project-list">Loading…</div>
+        </section>
+
+        <section>
+          <h2>Add Project</h2>
+          <form id="project-form" novalidate>
+            <label>Code<br>
+              <input id="code" name="code" placeholder="Code (max 5)" maxlength="5" required />
+            </label>
+            <label>Name<br>
+              <input id="name" name="name" placeholder="Name (max 100)" maxlength="100" required />
+            </label>
+            <label>Description<br>
+              <textarea id="descr" name="descr" placeholder="Description"></textarea>
+            </label>
+            <br />
+            <button id="project-submit" type="submit">Add Project</button>
+          </form>
+        </section>
+      </main>
+
+      <aside id="project-detail" class="detail">
+        <h2>Project Details</h2>
+        <div id="project-detail-content">Select a project to see details.</div>
+      </aside>
+    </div>
+
+    <script src="/static/app.js"></script>
+    <script>
+      if (window.initProjects) window.initProjects();
+    </script>
+  </body>
+</html>

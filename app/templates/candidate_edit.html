@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Edit Candidate — DMX</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <h1>Edit Candidate</h1>
+    <nav>
+      <a href="/">Home</a> |
+      <a href="/candidates">Candidates</a>
+    </nav>
+
+    <div id="candidate-edit">Loading…</div>
+
+    <script>
+      const id = location.pathname.split('/').pop();
+      async function load(){
+        const res = await fetch('/api/candidates/' + id);
+        if (!res.ok) return document.getElementById('candidate-edit').textContent = 'Not found';
+        const p = await res.json();
+        document.getElementById('candidate-edit').innerHTML = `
+          <form id='edit-form'>
+            <label>Name<br><input id='name' maxlength='100' value='${p.name}' required /></label><br>
+            <button type='submit'>Save</button>
+          </form>
+        `;
+        document.getElementById('edit-form').onsubmit = async (e) => {
+          e.preventDefault();
+          const body = { name: document.getElementById('name').value.trim() };
+          await fetch('/api/candidates/' + id, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+          location.href = '/candidate/view/' + id;
+        };
+      }
+      load();
+    </script>
+  </body>
+</html>
